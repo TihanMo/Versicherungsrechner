@@ -2,23 +2,32 @@ import React, { useState, useEffect } from "react";
 
 export default function Form() {
   const [hausratswert, setHausratswert] = useState();
-  const [versicherungswert, setVersicherungswert] = useState();
+  const [versicherungssumme, setVersicherungswert] = useState();
   const [schaden, setSchaden] = useState();
   const [ergebnis, setErgebnis] = useState();
 
   useEffect(() => {
-    if (hausratswert && versicherungswert && schaden) {
-      let bezahlterSchaden = (schaden * hausratswert) / versicherungswert;
+    if (hausratswert && versicherungssumme && schaden) {
+      let bezahlterSchaden = (versicherungssumme/hausratswert) * schaden;
       setErgebnis(bezahlterSchaden.toFixed(2));
     }
-  }, [hausratswert, versicherungswert, schaden]);
+  }, [hausratswert, versicherungssumme, schaden]);
+
+  const handleSchadenChange = (e) => {
+    const newSchaden = parseInt(e.target.value);
+    if (newSchaden > versicherungssumme) {
+      setSchaden(versicherungssumme);
+    } else {
+      setSchaden(newSchaden);
+    }
+  };
 
   return (
-    <div>
-      <h1>Versicherungsrechner</h1>
-
+    <div className="form">
+      
       <label htmlFor="hausratswert">Hausratswert:</label>
       <input
+        className="input-style"
         id="hausratswert"
         type="number"
         min="0"
@@ -27,23 +36,25 @@ export default function Form() {
       />
       <br />
 
-      <label htmlFor="versicherungswert">Versicherungswert:</label>
+      <label htmlFor="versicherungssumme">Versicherungssumme:</label>
       <input
-        id="versicherungswert"
+        className="input-style"
+        id="versicherungssumme"
         type="number"
         min="0"
-        value={versicherungswert}
+        value={versicherungssumme}
         onChange={(e) => setVersicherungswert(parseInt(e.target.value))}
       />
       <br />
 
       <label htmlFor="schaden">Schaden:</label>
       <input
+        className="input-style"
         id="schaden"
         type="number"
         min="0"
         value={schaden}
-        onChange={(e) => setSchaden(parseInt(e.target.value))}
+        onChange={handleSchadenChange}
       />
       <br />
 
