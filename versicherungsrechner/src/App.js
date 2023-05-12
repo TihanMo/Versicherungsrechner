@@ -1,15 +1,10 @@
 import './App.css';
-import Form from './components/Form';
-import Header from './components/Header';
+import Home from './components/Home';
 
 function App() {
   return (
     <div className="App">
-      <Header />
-
-      <h1>Hausratsrechner</h1>
-
-      <Form />
+      <Home/>
     </div>
   );
 }

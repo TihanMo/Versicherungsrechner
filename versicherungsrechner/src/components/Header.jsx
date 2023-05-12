@@ -1,14 +1,15 @@
 import React from 'react';
 import '../App.css';
+import { Link } from "react-router-dom";
 
 export default function Header() {
   return (
     <div className='header'>
-      <a href="#default" class="logo">Versicherungsrechner</a>
-        <div class="header-right">
-            <a class="active" href="#home">Home</a>
-            <a href="#contact">Contact</a>
-            <a href="#about">About</a>
+      <Link to="/" className="logo">Versicherungsrechner</Link>
+        <div className="header-right">
+            <Link to="home">Home</Link>
+            <Link to="about_us">Über uns</Link>
+            <Link to="contact">Kontakt</Link>
         </div>
     </div>
   )
